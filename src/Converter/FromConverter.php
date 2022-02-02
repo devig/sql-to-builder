@@ -24,9 +24,9 @@ class FromConverter extends Converter implements ConverterInterface
                 if ('ON' === strtoupper($item['ref_type'])) {
                     $args = [
                         $table,
-                        $this->getValueWithoutQuotes($item['ref_clause'][0], 'base_expr'),
-                        $item['ref_clause'][1]['base_expr'],
-                        $this->getValueWithoutQuotes($item['ref_clause'][2], 'base_expr'),
+                        $this->getValueWithoutQuotes($item['ref_clause'][0]['sub_tree'][0], 'base_expr'),
+                        '=', //$item['ref_clause'][1]['base_expr'] ?? '=',
+                        $this->getValueWithoutQuotes($item['ref_clause'][0]['sub_tree'][2], 'base_expr'),
                     ];
                     $result[] = $this->format(strtolower($item['join_type']).'Join', $args);
                 }
